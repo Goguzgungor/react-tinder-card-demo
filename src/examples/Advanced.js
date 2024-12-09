@@ -15,7 +15,12 @@ function Advanced() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await fetch('https://api.allorigins.win/raw?url=https://earn.superteam.fun/api/listings/?type=project&take=150')
+        const response = await fetch('https://proxy.cors.sh/https://earn.superteam.fun/api/listings/?type=project&take=150', {
+          headers: {
+            'x-cors-api-key':'temp_405f17cd24ff0b4b1f111197c2322ffb',
+            'Origin': 'solana-job-matcher.vercel.app',
+          }
+        })
         const data = await response.json()
         setDb(data)
         setCurrentIndex(data.length - 1)
