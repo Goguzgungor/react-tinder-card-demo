@@ -16,7 +16,7 @@ function Advanced() {
     const fetchListings = async () => {
       try {
         console.log('Fetching listings...')
-        const response = await fetch('/api/listings/?type=project&take=150')
+        const response = await fetch('https://earn.superteam.fun/api/listings/?type=project&take=150')
         const data = await response.json()
         setDb(data)
         setCurrentIndex(data.length - 1)
@@ -31,7 +31,7 @@ function Advanced() {
   const fetchProjectDetail = async (slug) => {
     try {
       console.log('Fetching project detail:', slug)
-      const response = await fetch(`/_next/data/mvGBLL2tEEy4aaHtBTZ8V/listings/project/${slug}.json?type=project&slug=${slug}`)
+      const response = await fetch(`https://earn.superteam.fun/_next/data/mvGBLL2tEEy4aaHtBTZ8V/listings/project/${slug}.json?type=project&slug=${slug}`)
       const data = await response.json()
       setSelectedProject(data.pageProps.bounty)
       setShowModal(true)
