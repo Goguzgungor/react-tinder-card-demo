@@ -93,6 +93,7 @@ function Advanced() {
 
   return (
       <div className="relative">
+        <h2>Superteam Job Matcher</h2>
         <div className='cardContainer'>
           {db.map((project, index) => (
               <TinderCard
