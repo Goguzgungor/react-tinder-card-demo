@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/listings/:path*",
+      "destination": "https://earn.superteam.fun/listings/:path*"
+    },
+    {
+      "source": "/_next/data/:path*",
+      "destination": "https://earn.superteam.fun/_next/data/:path*"
+    }
+  ]
+}
