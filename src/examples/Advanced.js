@@ -15,7 +15,7 @@ function Advanced() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await fetch('https://api.allorigins.win/raw?url=https://earn.superteam.fun/api/listings/?type=project&take=150')
+        const response = await fetch('https://api.allorigins.win/raw?url=https://earn.superteam.fun/api/listings/?type=project&take=100')
         const data = await response.json()
         setDb(data)
         setCurrentIndex(data.length - 1)
