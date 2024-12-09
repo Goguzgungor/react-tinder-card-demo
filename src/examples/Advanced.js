@@ -15,6 +15,7 @@ function Advanced() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
+        console.log('Fetching listings...')
         const response = await fetch('/api/listings/?type=project&take=150')
         const data = await response.json()
         setDb(data)
