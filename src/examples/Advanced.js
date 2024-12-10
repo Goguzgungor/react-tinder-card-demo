@@ -17,20 +17,27 @@ function Advanced() {
       try {
         const response = await fetch('https://proxy.cors.sh/https://earn.superteam.fun/api/listings/?type=project&take=150', {
           headers: {
-            'x-cors-api-key':'temp_405f17cd24ff0b4b1f111197c2322ffb',
+            'x-cors-api-key': 'temp_405f17cd24ff0b4b1f111197c2322ffb',
             'Origin': 'solana-job-matcher.vercel.app',
           }
-        })
-        const data = await response.json()
-        setDb(data)
-        setCurrentIndex(data.length - 1)
-      } catch (error) {
-        console.error('Error fetching listings:', error)
-      }
-    }
+        });
+        const data = await response.json();
 
-    fetchListings()
-  }, [])
+        // Sadece gelecekteki deadline'ları filtrele
+        const filteredData = data.filter(project => {
+          if (!project.deadline) return true; // Eğer deadline yoksa göster
+          return new Date(project.deadline) >= new Date(); // Geçmiş tarihleri çıkar
+        });
+
+        setDb(filteredData);
+        setCurrentIndex(filteredData.length - 1);
+      } catch (error) {
+        console.error('Error fetching listings:', error);
+      }
+    };
+
+    fetchListings();
+  }, []);
 
   const fetchProjectDetail = async (slug) => {
     try {
