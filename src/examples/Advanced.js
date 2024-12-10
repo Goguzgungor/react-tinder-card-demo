@@ -35,7 +35,12 @@ function Advanced() {
   const fetchProjectDetail = async (slug) => {
     try {
       console.log('Fetching project detail:', slug)
-      const response = await fetch(`https://api.allorigins.win/raw?url=https://earn.superteam.fun/_next/data/mvGBLL2tEEy4aaHtBTZ8V/listings/project/${slug}.json?type=project&slug=${slug}`)
+      const response = await fetch(`https://api.allorigins.win/raw?url=https://earn.superteam.fun/_next/data/mvGBLL2tEEy4aaHtBTZ8V/listings/project/${slug}.json?type=project&slug=${slug}`, {
+        headers: {
+          'x-cors-api-key':'temp_405f17cd24ff0b4b1f111197c2322ffb',
+          'Origin': 'solana-job-matcher.vercel.app',
+        }
+      })
       const data = await response.json()
       setSelectedProject(data.pageProps.bounty)
       setShowModal(true)
