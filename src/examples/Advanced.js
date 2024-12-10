@@ -35,19 +35,37 @@ function Advanced() {
   const fetchProjectDetail = async (slug) => {
     try {
       console.log('Fetching project detail:', slug)
-      const response = await fetch(`https://proxy.cors.sh/https://earn.superteam.fun/_next/data/mvGBLL2tEEy4aaHtBTZ8V/listings/project/${slug}.json?type=project&slug=${slug}`, {
+      const response = await fetch(`https://proxy.cors.sh/https://earn.superteam.fun/listings/project/${slug}`, {
         headers: {
-          'x-cors-api-key':'temp_405f17cd24ff0b4b1f111197c2322ffb',
+          'x-cors-api-key': 'temp_405f17cd24ff0b4b1f111197c2322ffb',
           'Origin': 'solana-job-matcher.vercel.app',
         }
-      })
-      const data = await response.json()
-      setSelectedProject(data.pageProps.bounty)
-      setShowModal(true)
+      });
+
+      const html = await response.text();
+
+      // Find __NEXT_DATA__ script content
+      const scriptContent = html.match(/<script id="__NEXT_DATA__" type="application\/json">(.*?)<\/script>/s);
+
+      if (!scriptContent || !scriptContent[1]) {
+        throw new Error('Could not find __NEXT_DATA__ script content');
+      }
+
+      // Parse JSON data from script content
+      const jsonData = JSON.parse(scriptContent[1]);
+
+      // Extract bounty data from pageProps
+      const bountyData = jsonData.props.pageProps.bounty;
+
+      console.log('Bounty data:', bountyData);
+
+      setSelectedProject(bountyData);
+      setShowModal(true);
+
     } catch (error) {
-      console.error('Error fetching project detail:', error)
+      console.error('Error fetching project detail:', error);
     }
-  }
+  };
 
   const childRefs = useMemo(
       () =>
